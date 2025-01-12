@@ -53,9 +53,13 @@ The "Jerries: " JLabel is the simplest GUI component to explain. The standard co
 
 ### Counter Field
 
+![CounterField](./stuff/CodeScreenshots/CounterField.png)
+
 The counter field is the incrementing number that increases with each press of the Jerry Button. The counter field is a JTextField object, an object that creates an area of text that can be edited either directly by the user edited by the program. The constructor in Line 60, takes in an integer for the number of columns in the text field, which is the number of characters that can occupy the text field. The font is then set similarly to how it's set for the Jerries label. The text for the counter is then aligned to the right using the setHorizontalAlignment() and by passing in the SwingConstants.RIGHT member variable. The text is also set to be uneditable using the setEditable() method. This only makes it uneditable for the user, the program can still access the text in this field and update it. Like the Jerries Label and Jerry Button, the Counter Field is added to and moved around on the JPanel.
 
 ### Reset Button
+
+![ResetButton](./stuff/CodeScreenshots/ResetButton.png)
 
 The last component to add is the reset button, which sets the counter back to zero when pressed. Since the reset button is just a text button, the constructor just takes in the string "RESET" to display it. The font for the "RESET" text is set using the same setFont function as the Jerries Label and the counter field and an ActionListener is added which takes in a lambda fuction that sets the text in the counter field back to zero when pressed. The reset button is added and moved the same way all the other components were added and moved.
 
@@ -63,23 +67,35 @@ The full JPanel is now created with all the necessary components. The very last 
 
 ## createImageButton() and loadPicture()
 
+![createImageButton](./stuff/CodeScreenshots/createImageButton.png)
+
+![loadPicture](./stuff/CodeScreenshots/loadPicture.png)
+
 Since images can't just be directly passed into the JButton constrcutor a method needs to be made to create an image button. createImageButton is set as a try-catch function since an incorrect file name could possibly be passed into the function. If a file that does not exist is passed into the function, an error will be given an the function will return null. If the file does exist, then the first step is to create an InputStream object. The first part, this.getClass(), gets the class loader for the class with getResourceAsStream using the relative path of the filename. Using this InputStream a BufferedImage is created using the read() method from the ImageIO class. read() only accepts an input stream to create a BufferedImage, so its pretty easy to make a BufferedImage since there's only one way to do it. If the isResized parameter is true, then the resizePicture() method will make a new image to the specified performances. Now, a JButton can be created by passing an ImageIcon object as the parameter for the JButton using the newly created BufferedImage and the method returns this image button. The loadPicture method works exactly the same, except it creates a JLabel object instead of a JButton object.
 
 ## resizePicture()
+
+![resizePicture](./stuff/CodeScreenshots/resizePicture.png)
 
 This the method called by createImageButton() and loadPicture() to resize the button and the banner if needed. The BufferedImage() constructor takes in a height and width for its parameter as well as a color space image type. Next using the newly created, blank BufferedImage, a Graphics2D object is made. Graphics2D is a class used to more easily make shapes and manage colors, and do various graphics thing. This class isn't super important for this project other than for this particular method. The main purpose of calling it is to use the drawImage() function which takes in an image to be drawn (which will be the image for the button or banner), the starting x and y coordinates, the new dimensions for the image to be drawn in, and an ImageObserver object (this isn't used at all so null is passed in). Once the new image is drawn to the proper dimensions, the graphics2D object must be disposed since, according to the documentation, it's better to dispose of the object manually than by relying on garbage collection if there are a lot of graphics 2D objects. The method will then return the new BufferedImage for the createImageButton() method or loadPicture() method to have properly sized pictures.
 
 ## playMusic() and playSound()
 
+![playMusic](./stuff/CodeScreenshots/playMusic.png)
+
+![playSound](./stuff/CodeScreenshots/playSound.png)
+
 As a way to set my project apart a little more, add some tactile feedback, and help create an atmosphere, I decided to music and play a sound when the Jerry Button is pressed. Both these methods are relatively similar, but they have a few important differences.
 
 playMusic() is the method from the constructor that will a song as long as Jerry Clicker is open. Like the loadPicture() and createImageButton() methods, it also has a try-catch set-up to return an error if a file doesn't exist or can't be found. It starts by getting an input stream the same way as the images but then passes it to an AudioInputStream object. A clip object is then also created in line 131. The clip is the class that represents the actual audio in the java code. From what I've see in my research, wav files tend to work the best for clips since no extra parsing is needed, but it is important to note that mp3s are smaller and easier to retrieve in code. Now that file is loaded its information can be accessed with open() method. I did also decide to do a bit of volume control since I found the audio to be little loud. This is done by getting a control from the clip using the getControl() method. Once the volume is turned down using the setValue() method on the FloatControl object, the clip is then played and looped using the loop() method. This makes it so that the audio will play as long as Jerry Clicker is open.
 
-NOTE: The music file was too big to add into the repo. If you want the true JerryClicker experience then add a .wav file of "All I Need" by Radiohead.
+NOTE: The music file was too big to add into the repo. If you want the true JerryClicker experience then add a .wav file of "All I Need" by Radiohead to the stuff directory.
 
 playSound() is very similar to playMusic(). It's the method used in the ActionListener from the JerryButton component for the button to make a sound when pressed. The first five lines of the try block in playSound() are the same as playMusic(), but after that it differs. First, since the sound is being played mulitple times, the frame position must be set back to the start since clip playback position is stored by java. I also modified the volume for the sound just like I did for the music, but I turned it up instead since it was a little quiet. Now that all of that is set up, the audio file can be played with the start() method and sound is played with a button press.
 
 ## main() and Closing Thoughts
+
+![main](./stuff/CodeScreenshots/main.png)
 
 The last thing to make Jerry Clicker run is to load it in a main method. There is only one line of code in the main method and that is creating a new JerryClicker and make it visible. Remember the constructor for JerryClicker already made all of the necessary stuff for JerryClicker, the user just needs to be able to see it. This done by using the setVisible method on the JerryClicker object and passing in a true boolean. 
 
