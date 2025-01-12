@@ -1,6 +1,7 @@
 # JerryClicker
 A cookie clicker clone with some creative liberties that I made to understand swing and awt.
 
+![JerryClicker](./stuff/CodeScreenshots/JerryClicker.png)
 
 GUIs are very powerful tools that can help add visual aspects to programs. I personally want to get more complex interactive experiences from my programs. One way to use GUI's is by using the java.swing and java.awt libraries. One of the best ways to get a better understanding of these libraries is through simple programs like login prompts, or--in this project's case--Cookie Clicker. The goal of Cookie Clicker is simple, click on a cookie and watch the number of clicks go up. 
 
@@ -18,11 +19,17 @@ That leaves the last two methods of the constructor. addComponents() is a void m
 
 ## addComponents()
 
+![addComponents](./stuff/CodeScreenshots/addComponents.png)
+
 This is the most important method of the JerryClicker class. The constructor only made the window, but once it executes this method adds all of the components that add to the visuals and interactive components of Jerry Clicker. Line 28 initializes and assigns a SpringLayout object. The SpringLayout class is a way to move objects around in an area using code and pixel counting. If you're using an application like NetBeans you don't have to worry about this with its GUI Builder, but Jerry Clicker was written in IntelliJ, so it's kind of relevant to this project. I'll get more into how I used when I get to the relevant putConstraint() method.
 
 Line 29 initializes a JPanel. The JPanel will be the container for everything. It will hold a banner image, the Jerry Button, a click counter and it's associated text field, and a reset button. The only method that acts directly on the JPanel that we have right now is setLayout() in Line 30. This will set the layout manager to be the springLayout object. There are other layout manager, but I don't know anything on them as of now so I can't speak on them. From here, we will so how each individual subcomponent is added to the JPanel and how they work as GUI objects.
 
 ### The Banner
+
+![Banner](./stuff/Banner.png)
+
+![BannerCode](./stuff/CodeScreenshots/BannerCode.png)
 
 This section is unfortunately underwhelming because in terms of coding it creates a JLabel from the loadPicture method, which we won't talk about for a bit, and then adds it to the JPanel. For now, loadPicture() takes a directory path, a boolean for if the picture needs to be resized, and the new dimensions of the picture for resizing. The add() method actually adds the banner right to where it needs, so springLayout isn't needed here.
 
@@ -30,11 +37,17 @@ In terms of how Jerry Clicker functions as a GUI. The banner is pretty important
 
 ### The Jerry Button
 
+![JerryButton](./stuff/JerryButton.png)
+
+![JerryButtonCode](./stuff/CodeScreenshots/JerryButtonCode.png)
+
 The Jerry Button has some complexities to it since it incorporates a couple of new things. First a JButton is made from the createImageButton() method. This method will also be touched on later, but for now, just know that it serves a very similar purpose as the loadPicture() method returning a JButton instead. To touch upon JButtons, they are push buttons that users can interact with to do something in the program. As you'll see in line 39, this needs to be implemented using the addActionListener() method. In this case, it's taking in a lambda function as it's argument and that function is incrementing the counter field on each click and playing a sound.
 
 This is also the first example of using the SpringLayout to move an object into place. First the Jerry Button must be added to the JPanel and then it can be moved using the putConstraints() method of the SpringLayout class. There are five parameters to enter when using putConstraints. The first two parameters are the edge of the component you want to move and the component itself. In this case the first two parameters will be for the west edge of the Jerry Button, so using the WEST attribute of the SpringLayout we add (SpringLayout.WEST, jerryButton, ...). Next, we add the padding or how many pixels we want to move the object. I could have done math for this using the size of the button and the size of the window, but I just guessed and checked and thought 40 pixels seemed right for the west edge. Then, the last two parameters are added which are what for what the first two parameters are moved relative to. In case, we're moving relative to the JPanel and its west side so we add (..., SpringLayout.WEST, jPanel) to the method call. This will move the west side of the Jerry Button 40 pixels away from the west side of the JPanel. This is then repeated with the north side of the Jerry Button to move it down the JPanel. SpringLayout is pretty simple to understand (at least to me) and seems like a good layout manager for people just starting to use GUIs.
 
 ### "Jerries: " Label
+
+![JerriesLabel](./stuff/CodeScreenshots/JerriesLabel.png)
 
 The "Jerries: " JLabel is the simplest GUI component to explain. The standard constructor for a JLabel object is a string that will be displayed which is all that line 51 does. The setFont() method then acts on the counterLabel object to set the font of JLabel. It takes in a Font object which takes parameters for the font title, font style (plain, blod, or italicized) and the size. This is then added to the JPanel and moved using the SpringLayout.
 
