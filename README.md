@@ -8,6 +8,8 @@ I made this version of Cookie Clicker following a YouTube tutorial by TapTap fro
 
 ## Constructor
 
+![Constructor](./stuff/CodeScreenshots/Constructor.png)
+
 The JerryClicker class is an inherited class extending JFrame, which is essentially the class that makes the main window of a swing program. This allows us to use JFrame methods on our Jerry Clicker program. The super constructor inherits the JFrame constructor for Jerry Clicker and allows to give the frame a title.
 
 The other methods all set behaviors and attributes for the window. Line 16 sets the window to be closed completely and exited by the program using System.exit method. Line 17 sets the size of the frame using a Dimension object, which sets the width and height in pixels. Line 18 is just the pack() method, which causes the window to fit the size of it's panel compenent which holds all of the subcomponents. Lines 19 and 20 are pretty self-explanatory, they lock the window size since setResizeable is set to false, and centers the window to the screen when Jerry Clicker is launched since null is passed to setLocationRelativeTo(). 
@@ -59,6 +61,8 @@ This the method called by createImageButton() and loadPicture() to resize the bu
 As a way to set my project apart a little more, add some tactile feedback, and help create an atmosphere, I decided to music and play a sound when the Jerry Button is pressed. Both these methods are relatively similar, but they have a few important differences.
 
 playMusic() is the method from the constructor that will a song as long as Jerry Clicker is open. Like the loadPicture() and createImageButton() methods, it also has a try-catch set-up to return an error if a file doesn't exist or can't be found. It starts by getting an input stream the same way as the images but then passes it to an AudioInputStream object. A clip object is then also created in line 131. The clip is the class that represents the actual audio in the java code. From what I've see in my research, wav files tend to work the best for clips since no extra parsing is needed, but it is important to note that mp3s are smaller and easier to retrieve in code. Now that file is loaded its information can be accessed with open() method. I did also decide to do a bit of volume control since I found the audio to be little loud. This is done by getting a control from the clip using the getControl() method. Once the volume is turned down using the setValue() method on the FloatControl object, the clip is then played and looped using the loop() method. This makes it so that the audio will play as long as Jerry Clicker is open.
+
+NOTE: The music file was too big to add into the repo. If you want the true JerryClicker experience then add a .wav file of "All I Need" by Radiohead.
 
 playSound() is very similar to playMusic(). It's the method used in the ActionListener from the JerryButton component for the button to make a sound when pressed. The first five lines of the try block in playSound() are the same as playMusic(), but after that it differs. First, since the sound is being played mulitple times, the frame position must be set back to the start since clip playback position is stored by java. I also modified the volume for the sound just like I did for the music, but I turned it up instead since it was a little quiet. Now that all of that is set up, the audio file can be played with the start() method and sound is played with a button press.
 
