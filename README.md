@@ -1,7 +1,7 @@
 # JerryClicker
 A cookie clicker clone with some creative liberties that I made to understand swing and awt.
 
-![JerryClicker](./stuff/JerryClicker.png)
+![JerryClicker](./stuff/codeScreenshots/JerryClicker.png)
 
 GUIs are very powerful tools that can help add visual aspects to programs. I personally want to get more complex interactive experiences from my programs. One way to use GUI's is by using the java.swing and java.awt libraries. One of the best ways to get a better understanding of these libraries is through simple programs like login prompts, or--in this project's case--Cookie Clicker. The goal of Cookie Clicker is simple, click on a cookie and watch the number of clicks go up. 
 
