@@ -19,7 +19,8 @@ public class JerryClicker extends JFrame {
 
         addComponents();
 
-        playMusic("stuff/AllJerryNeeds.wav");
+        // Since the music file cannot be added to the repo, I'll keep this line commented out
+        // playMusic("stuff/AllJerryNeeds.wav");
     }
 
     private void addComponents() {
